@@ -89,6 +89,12 @@ input[type=button] {
      height: 4rem;
      color: black;
      width: 100%;
+     /* font-size: 1.2rem; */
+     display: flex;
+     justify-content: flex-end;
+     
+
+     
 }
 
 header {
