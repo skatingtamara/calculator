@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+
+		<title>Blank Template</title>
+
+		<!-- fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<table class="calculator">
+			<tr>
+				<!-- Output -->
+				<td colspan="3"><input class="display-box" type="text" id="result" disabled/> </td>
+				<!-- clearLast() function will clear the last entered value -->
+				<td class="operand"><input type="button" value="Del" onclick="clearLast()" id="btn" /></td>
+			</tr>
+			<tr>
+				<!-- clearScreen() function to clear all values -->
+				<td class="buttonDark alert"><input type="button" value="C" onclick="clearScreen()" id="btn" /></td>
+				<!-- display() function to display the value of the clicked button -->
+				<td class="buttonDark  operand"><input type="button" value="&#40;&#41;" onclick="display('&#40;&#41;')" /></td>
+				<td class="buttonDark  operand"><input type="button" value="%" onclick="display('%')" /></td>
+				<td class="buttonDark  operand"><input type="button" value="/" onclick="display('/')" /></td>
+			</tr>
+			<tr>
+				<td class="buttonDark "><input type="button" value="7" onclick="display('7')" /></td>
+				<td class="buttonDark "><input type="button" value="8" onclick="display('8')" /></td>
+				<td class="buttonDark "><input type="button" value="9" onclick="display('9')" /></td>
+				<td class="buttonDark  operand"><input type="button" value="*" onclick="display('*')" /></td>
+			</tr>
+			<tr>
+				<td class="buttonDark "><input type="button" value="4" onclick="display('4')" /></td>
+				<td class="buttonDark "><input type="button" value="5" onclick="display('5')" /></td>
+				<td class="buttonDark "><input type="button" value="6" onclick="display('6')" /></td>
+				<td class="buttonDark  operand"><input type="button" value="-" onclick="display('-')" /></td>
+			</tr>
+			<tr>
+				<td class="buttonDark "><input type="button" value="1" onclick="display('1')" /></td>
+				<td class="buttonDark "><input type="button" value="2" onclick="display('2')" /></td>
+				<td class="buttonDark "><input type="button" value="3" onclick="display('3')" /></td>
+				<td class="buttonDark  operand"><input type="button" value="+" onclick="display('+')" /></td>
+			</tr>
+			<tr>
+				<td class="buttonDark "><input type="button" value="+/-" onclick="display('+/-')" /></td>
+				<td class="buttonDark "><input type="button" value="0" onclick="display('0')" /></td>
+				<td class="buttonDark "><input type="button" value="." onclick="display('.')" /></td>
+				<!-- calculate() function will evaluate the entered expression -->
+				<td class=" highlight"><input type="button" value="=" onclick="calculate()" id="btn" /></td>
+			</tr>
+
+		</table>
+
+
+
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

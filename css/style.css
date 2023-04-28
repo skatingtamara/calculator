@@ -1,0 +1,104 @@
+/* Box Model Hack */
+* {
+     box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+html {
+     font-size: 100%;         /* setting relative font size for accessibility. Here default is 16px */
+}
+
+body {
+     font-family: 'Lexend', sans-serif;
+     background: black;
+     margin: 2.5rem;
+}
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+.calculator {
+
+}
+
+input[type=button] {
+     position: relative;
+     padding: 0 1.25rem;
+     display: inline-block;
+     border: none;
+     outline: none;
+     background: #595958;
+     height: 4rem;
+     width: 4rem;
+     border-radius: 100%;
+     font-size: 1.2rem
+}
+
+.buttonDark input{
+     color: white;
+
+     &:active {
+          background: #999997;
+          font-size: 1rem;
+     }
+}
+
+.highlight input{
+     background: #00dc00;
+     color: white;
+
+     &:active {
+          background: #47ff47;
+          font-size: 1rem;
+     }
+}
+
+.operand input{
+     color: #00dc00;
+
+     &:active {
+          background: #999997;
+          font-size: 1rem;
+     }
+}
+
+.alert input{
+     color: #ff784f;
+}
+
+.display-box {
+     height: 4rem;
+     color: black;
+     width: 100%;
+}
+
+header {
+
+}
+
+footer {
+
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
