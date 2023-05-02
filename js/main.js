@@ -66,7 +66,6 @@ function calculate(){
             answer = Number(previousNum) + Number(nextNum);
             console.log(answer)
             break;
-        
     }
 
     document.querySelector('.display-box').value = answer
