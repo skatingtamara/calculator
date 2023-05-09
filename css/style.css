@@ -36,9 +36,6 @@ body {
 /* LAYOUT
 /*******************************************/
 
-.calculator {
-
-}
 
 input[type=button] {
      position: relative;
@@ -50,7 +47,7 @@ input[type=button] {
      height: 4rem;
      width: 4rem;
      border-radius: 100%;
-     font-size: 1.2rem
+     font-size: 1.5rem
 }
 
 .buttonDark input{
@@ -58,7 +55,7 @@ input[type=button] {
 
      &:active {
           background: #999997;
-          font-size: 1rem;
+          font-size: 1.2rem;
      }
 }
 
@@ -68,7 +65,7 @@ input[type=button] {
 
      &:active {
           background: #47ff47;
-          font-size: 1rem;
+          font-size: 1.2rem;
      }
 }
 
@@ -77,7 +74,7 @@ input[type=button] {
 
      &:active {
           background: #999997;
-          font-size: 1rem;
+          font-size: 1.2rem;
      }
 }
 
@@ -85,17 +82,42 @@ input[type=button] {
      color: #ff784f;
 }
 
-.display-box {
+.output {
+     height: 4rem;
+     background: grey;
+     border-radius: 2%;
+     color: black;
+     width: 17rem;
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-end;
+     flex-direction: column;
+     padding: 0.625rem;
+     word-wrap: break-word;
+     word-break: break-all;
+}
+
+.output .previous-operand{
+     color: rgba(40,40,40,1);
+     font-size: 1rem;
+}
+
+.output .current-operand{
+     color: rgba(0,0,0,1);
+     font-size: 1.5rem;
+}
+
+
+/* .display-box {
      height: 4rem;
      color: black;
      width: 100%;
-     /* font-size: 1.2rem; */
      display: flex;
-     justify-content: flex-end;
+     justify-content: space-between;
+     align-items: flex-end;
      
-
      
-}
+} */
 
 header {
 

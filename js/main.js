@@ -1,126 +1,149 @@
-// Global fields
-let typing = ''
-let previousNum = '' 
-let nextNum = ''
-let currentOperand = ''
-// const operands = ['%','/','*','-','+']
+class Calculator {
+    constructor(previousOperandText,currentOpera){
+        this.previousOperandTextElement = previousOperandTextElement
+        this.currentOperandTextElement = currentOperandTextElement
+        this.clear()
+    }
 
-//display() function wil display the value of the clicked buttons with logic for apporptiate input order
-function display(clicked){
-    typing += clicked
-    saveValues(clicked)
-    
-    document.querySelector('.display-box').value = typing
-    
-}
+    clear(){
+        this.currentOperand = ''
+        this.previousOperand = ''
+        this.operation = undefined
+    }
 
-function saveValues(clicked){
-    // console.log(clicked)
-    // console.log(+clicked)
-    // console.log(Number(clicked))
-    // console.log(`typedof clicked: ${typeof clicked}`)
-    // console.log(`typedof clicked: ${typeof Number(clicked)}`)
-    
-    if(Number(clicked) == clicked){
-        // console.log(`clicked is ${clicked}`)
-        // console.log(`previousNum is ${previousNum}`)
-        // console.log(`nextNum is ${nextNum}`)
-        // console.log(`currentOperand is ${currentOperand}`)
+    delete(){
+        this.currentOperand = this.currentOperand.toString().slice(0,-1)
+    }
 
+    appendNumber(number){
+        if(number === '.' && this.currentOperand.includes('.')) return
+        this.currentOperand += number.toString()
+    }
 
-        if(currentOperand.length === 0){
-            previousNum += clicked
-            console.log(`previousNum is ${previousNum}`)
-        } else {
-            nextNum += clicked
-            console.log(`nextNum is ${nextNum}`)
+    chooseOperation(operation){
+        if ( this.currentOperand === '') return
+        if ( this.previousOperand !== '') {
+            this.compute()
         }
-    } else {
-        if(currentOperand.length === 0){
-            currentOperand = clicked
-            console.log(`currentOperand is ${currentOperand}`)
-        } else {
-            calculate()
+        this.operation = operation
+        this.previousOperand = this.currentOperand
+        this.currentOperand = ''
 
-        } 
-    }
-    
-}
-
-
-
-
-// calculate() function will evaluate the entered expression
-function calculate(){
-    console.log('calculating')
-    let answer = 0
-    // split the typed elements into numeric expressions
-
-
-
-
-
-
-    switch(currentOperand){
-        case '+':
-            answer = Number(previousNum) + Number(nextNum);
-            console.log(answer)
-            break;
     }
 
-    document.querySelector('.display-box').value = answer
-}
+    positiveNegative(){
+        this.currentOperand = this.currentOperand * -1
+    }
 
+    percent(){
+        this.currentOperand = this.currentOperand * .01
+    }
 
-// clearLast() function will delete the last entered value
-
-
-// clearScreen() function will clear all on the screen
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-for(let i = 0; i < typedArr.length; i++){
-    console.log(i)
-    // console.log(`typedArr[i] is ${typedArr[i]} and typeof typedArr[i] is ${typeof typedArr[i]}`)
-    // console.log(`+typedArr[i] is ${+typedArr[i]} and typeof +typedArr[i] is ${typeof +typedArr[i]}`)
-    console.log(`Number(typedArr[i]) is ${Number(typedArr[i])} and typeof Number(typedArr[i]) is ${typeof Number(typedArr[i])}`)
-    if(typeof Number(typedArr[i]) === 'number'){
-        if (operand.length > 0){
-            num2 += Number(typedArr[i])
-            console.log(`num2 is ${num2}`)
+    compute(){
+        let computation = 0
+        const prev = parseFloat(this.previousOperand)
+        const current = parseFloat(this.currentOperand)
+        if ( isNaN(prev) || isNaN(current)) return
+        switch(this.operation){
+            case '+':
+                computation = prev + current
+                break
+            case '-':
+                computation = prev - current
+                break
+            case '*':
+                computation = prev * current
+                break
+            case '÷':
+                computation = prev / current
+                break
+            default:
+                return
         }
-        num1 += Number(typedArr[i])
-            console.log(`num1 is ${num1}`)
-    } else {
-        operand = typedArr[i]
-        // num2 = Number(typedArr.slice(i))
-        // console.log(`operand is ${operand}`)
-        // console.log(`num2 is ${num2}`)
+        this.currentOperand = computation
+        this.operation = undefined
+        this.previousOperand = ''
+    }
+
+    getDisplayNumber(number){
+        const stringNumber = number.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if (isNaN(integerDigits)){
+            integerDisplay = ''
+        } else {
+            integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0 })
+        }
+        if (decimalDigits != null){
+            return `${integerDisplay}.${decimalDigits}`
+        } else {
+            return integerDisplay
+        }
+    }
+
+    updateDisplay(){
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
+        if (this.operation != null){
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        } else {
+            this.previousOperandTextElement.innerText = ''
+        }
+      
 
     }
+
 }
 
-*/
+const numbersButtons = document.querySelectorAll('[data-number]')
+const operationsButtons = document.querySelectorAll('[data-operation]')
+const equalsButton = document.querySelector('[data-equals]')
+const deleteButton = document.querySelector('[data-delete]')
+const allClearButton = document.querySelector('[data-all-clear]')
+const positiveNegativeButton = document.querySelector('[data-positive-negative]')
+const percentButton = document.querySelector('[data-percent]')
+const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+const currentOperandTextElement = document.querySelector('[data-current-operand]')
+
+
+
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+
+numbersButtons.forEach(button =>{
+    button.addEventListener('click', () =>{
+        calculator.appendNumber(button.value)
+        calculator.updateDisplay()
+    })
+})
+
+operationsButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseOperation(button.value)
+        calculator.updateDisplay()
+    })
+})
+
+equalsButton.addEventListener('click', () => {
+    calculator.compute()
+    calculator.updateDisplay()
+})
+
+allClearButton.addEventListener('click', () => {
+    calculator.clear()
+    calculator.updateDisplay()
+})
+
+deleteButton.addEventListener('click', () => {
+    calculator.delete()
+    calculator.updateDisplay()
+})
+
+positiveNegativeButton.addEventListener('click', () => {
+    calculator.positiveNegative()
+    calculator.updateDisplay()
+})
+
+percentButton.addEventListener('click', () => {
+    calculator.percent()
+    calculator.updateDisplay()
+})
